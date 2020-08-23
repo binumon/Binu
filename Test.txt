@@ -1,0 +1,23 @@
+Delete Dulpicate record
+===========================
+WITH cte AS (
+    SELECT 
+        id ,
+        ROW_NUMBER() OVER (
+            PARTITION BY 
+                id
+            ORDER BY 
+                id
+        ) row_num
+     FROM 
+        employee
+)
+DELETE FROM cte
+WHERE row_num > 1;
+
+select * from employee
+
+
+
+2) Table will not delete because Drop query inside condition. If record exist then only drop table
+3)Select * from employee where deptid not in(select id from Department)
